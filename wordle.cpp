@@ -1,24 +1,14 @@
+#include "wordle.h"
+#include <cstring>
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
-class Word {
-public:
-    Word();
-    void setWord(string wordName);
-    bool checkAndPrintGuess(string guess);
-    int wordLength();
-
-private:
-    size_t lenOfWord;
-    string targetWord;
-};
-
 Word::Word() {
     lenOfWord = 0;
     targetWord = "";
+    guesses = 0;
 }
 
 void Word::setWord(string wordName) {
@@ -80,32 +70,4 @@ bool Word::checkAndPrintGuess(string guess) {
     delete[] guessUsed;
 
     return isCorrect;
-}
-
-int main() {
-    Word word1;
-    word1.setWord("queue");
-    
-    string guess;
-    bool isCorrect = false;
-
-    cout << "Guess the " << word1.wordLength() << " letter word!" << endl;
-
-    while (!isCorrect) {
-        cout << "Enter guess: ";
-        cin >> guess;
-
-        if (guess.size() != word1.wordLength()) {
-            cout << "Write a word with " << word1.wordLength() << " letters." << endl;
-            continue; 
-        }
-
-        isCorrect = word1.checkAndPrintGuess(guess);
-
-        if (isCorrect) {
-            cout << "Correct! You won!" << endl;
-        }
-    }
-
-    return 0;
 }
